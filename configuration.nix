@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
-
-{
+{ 
+  
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -9,19 +9,31 @@
   services.xserver.displayManager.gdm.enable = false;
   services.xserver.desktopManager.gnome.enable = false;
 
-  # User configuration with automatic login
-  users.users.alice = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      tree
-    ];
-    initialPassword = "testpw";
-    createHome = true; # Automatically create home directory
-    shell = "/run/current-system/sw/bin/bash"; # Specify the shell path
+  # Set hostname
+  networking.hostName = "nixos-console-vm";
+
+  # Configure the system locale
+  i18n = {
+    consoleFont = "lat9w-16";
+    consoleKeyMap = "us";
+    defaultLocale = "en_US.UTF-8";
   };
 
-  # Enable automatic login for the specified user using getty
-  services.getty.autologinUser = "alice";
+  # Enable the NixOS module system
+  imports = [
+    <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
+  ];
+
+  # Define the system services
+  services = {
+    # Enable the OpenSSH server
+    openssh = {
+      enable = true;
+    };
+  };
+  environment.systemPackages = with pkgs; [
+    python38
+  ];
+  
   system.stateVersion = "23.11";
 }
