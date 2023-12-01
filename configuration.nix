@@ -35,6 +35,8 @@
       enable = true;
     };
   };
+  
+  
   # Rootless Docker, VM issues
   virtualisation.docker = {
     enable = true;
@@ -43,6 +45,8 @@
       setSocketVariable = true;
     };
   };
+  
+  
   # Enable automatic login for the specified user using getty
   services.getty.autologinUser = "alice";
   system.stateVersion = "23.11";
