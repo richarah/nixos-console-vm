@@ -21,6 +21,9 @@
     createHome = true; # Automatically create home directory
     shell = "/run/current-system/sw/bin/bash"; # Specify the shell path
   };
+  # Networking configuration
+  networking.nameservers = ["1.1.1.1" "8.8.8.8"];
+  networking.hostName = "nixos";
 
 
   networking.hostName = "docker-nixos";
