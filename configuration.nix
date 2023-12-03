@@ -26,17 +26,15 @@
     packages = with pkgs; [
       tree
       docker
+      docker-compose
     ];
     initialPassword = "testpw";
     createHome = true; # Automatically create home directory
     shell = "/run/current-system/sw/bin/bash"; # Specify the shell path
   };
+
   # Networking configuration
   networking.nameservers = ["1.1.1.1" "8.8.8.8"];
-  networking.hostName = "nixos";
-
-<<<<<<< HEAD
-
   networking.hostName = "docker-nixos";
   i18n = {
     consoleFont = "lat9w-16";
@@ -49,23 +47,10 @@
       enable = true;
     };
   };
-  
-  
-  # Rootless Docker, VM issues
-  virtualisation.docker = {
-    enable = true;
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
-  };
-  
-  
-=======
+
   # Docker
   virtualisation.docker.enable = "true";
 
->>>>>>> 9f38ed3 (Updated config & build for docker container environment)
   # Enable automatic login for the specified user using getty
   services.getty.autologinUser = "alice";
   system.stateVersion = "23.11";
