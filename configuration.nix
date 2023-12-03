@@ -10,6 +10,7 @@
   services.xserver.desktopManager.gnome.enable = false;
 
   environment.systemPackages = with pkgs; [
+    systemd
     docker
     docker-compose
     gnumake
@@ -25,8 +26,6 @@
     extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user and add to Docker usergroup.
     packages = with pkgs; [
       tree
-      docker
-      docker-compose
     ];
     initialPassword = "testpw";
     createHome = true; # Automatically create home directory
@@ -49,7 +48,7 @@
   };
 
   # Docker
-  virtualisation.docker.enable = "true";
+  virtualisation.docker.enable = true;
 
   # Enable automatic login for the specified user using getty
   services.getty.autologinUser = "alice";
