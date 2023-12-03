@@ -9,6 +9,16 @@
   services.xserver.displayManager.gdm.enable = false;
   services.xserver.desktopManager.gnome.enable = false;
 
+  environment.systemPackages = with pkgs; [
+    docker
+    docker-compose
+    gnumake
+    git
+    bash
+    gcc
+    # Add other build essentials here
+  ];
+
   # User configuration with automatic login
   users.users.alice = {
     isNormalUser = true;
@@ -25,6 +35,7 @@
   networking.nameservers = ["1.1.1.1" "8.8.8.8"];
   networking.hostName = "nixos";
 
+<<<<<<< HEAD
 
   networking.hostName = "docker-nixos";
   i18n = {
@@ -50,6 +61,11 @@
   };
   
   
+=======
+  # Docker
+  virtualisation.docker.enable = "true";
+
+>>>>>>> 9f38ed3 (Updated config & build for docker container environment)
   # Enable automatic login for the specified user using getty
   services.getty.autologinUser = "alice";
   system.stateVersion = "23.11";
